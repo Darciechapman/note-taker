@@ -23,7 +23,6 @@ app.get("/api/notes", function (request, response) {
         response.json(contents);
     })
 })
-
   
 app.get("*", function (request, response) {
     response.sendFile(path.join(__dirname, "/public/index.html"))
