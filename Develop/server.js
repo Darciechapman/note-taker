@@ -25,20 +25,22 @@ app.get("/api/notes", function (request, response) {
     fs.readFile('db/db.json', (err, data) => {
         if (err) throw err;
         let noteData = JSON.parse(data);
-        console.log(noteData);
         return response.json(noteData)
     });
-    //fs.readFile("db/db.json", data => { 
-        //const contents = JSON.stringify(data);
-    //})
-        //response.json(result);
-        //console.log(contents);
-        //return response.json(data);
-    //})
 })
   
 app.get("*", function (request, response) {
     response.sendFile(path.join(__dirname, "/public/index.html"))
+})
+
+app.post("/api/notes", function(request, response) {
+    fs.readFile('db/db.json', (err, data) => {
+        if (err) throw err;
+        let noteData = JSON.parse(data);
+        noteData.push(request.body)
+        response.json(noteData);
+        return response
+    });
 })
 
 //function makeTeam() {

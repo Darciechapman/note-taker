@@ -54,8 +54,7 @@
     console.log(newNote);
 
     $.post("/api/notes", newNote, function(data) {
-      $("#title").val("");
-      $(".note-textarea").val("");
+      console.log(data)
     })
   })
 
