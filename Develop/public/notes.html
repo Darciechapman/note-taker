@@ -45,14 +45,19 @@
 
   $(".save-note").on("click", function(event) {
     event.preventDefault();
-  })
 
-  var newNote = {
-    title: $("#title").val(),
-    text: $("#note-textarea").val(),
-  };
+    var newNote = {
+      title: $("#title").val(),
+      text: $(".note-textarea").val(),
+    };
   
-  console.log(newNote);
+    console.log(newNote);
+
+    $.post("/api/notes", newNote, function(data) {
+      $("#title").val("");
+      $(".note-textarea").val("");
+    })
+  })
 
 
 </script>

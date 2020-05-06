@@ -1,9 +1,14 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+let notesArray = [{
+    title: "test",
+    text: "test"
+}]
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -13,15 +18,23 @@ app.listen(PORT, function() {
 });
 
 app.get("/notes", function (request, response) {
-    response.sendFile(path.join(__dirname, "/public/notes.html"))
+    response.sendFile(path.join(__dirname, "public/notes.html"))
 })
 
 app.get("/api/notes", function (request, response) {
-    fs.readFile(path.json(__dirname, "/db/db.json"), result => { 
-        const contents = JSON.parse(result)
-        console.log(contents);
-        response.json(contents);
-    })
+    fs.readFile('db/db.json', (err, data) => {
+        if (err) throw err;
+        let noteData = JSON.parse(data);
+        console.log(noteData);
+        return response.json(noteData)
+    });
+    //fs.readFile("db/db.json", data => { 
+        //const contents = JSON.stringify(data);
+    //})
+        //response.json(result);
+        //console.log(contents);
+        //return response.json(data);
+    //})
 })
   
 app.get("*", function (request, response) {
