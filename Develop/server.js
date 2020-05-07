@@ -34,13 +34,11 @@ app.get("*", function (request, response) {
 })
 
 app.post("/api/notes", function(request, response) {
-    fs.readFile('db/db.json', (err, data) => {
-        if (err) throw err;
-        let noteData = JSON.parse(data);
-        noteData.push(request.body)
-        response.json(noteData);
-        return response
-    });
+    console.log(request)
+    //notesArray.push(request.body)
+    //response.json(notesArray);
+    //console.log(request.body)
+        
 })
 
 //function makeTeam() {
